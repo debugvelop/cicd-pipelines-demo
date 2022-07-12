@@ -42,6 +42,7 @@ spec:
       containers:
       - name: server
         image: $DEFAULT_REPO/emailservice:canary
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
         env:
@@ -99,6 +100,7 @@ spec:
       containers:
         - name: server
           image: $DEFAULT_REPO/checkoutservice:canary
+          imagePullPolicy: Always
           ports:
           - containerPort: 5050
           readinessProbe:
@@ -171,6 +173,7 @@ spec:
       containers:
       - name: server
         image: $DEFAULT_REPO/recommendationservice:canary
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
         readinessProbe:
@@ -234,6 +237,7 @@ spec:
       containers:
         - name: server
           image: $DEFAULT_REPO/frontend:canary
+          imagePullPolicy: Always
           ports:
           - containerPort: 8080
           readinessProbe:
@@ -344,6 +348,7 @@ spec:
       containers:
       - name: server
         image: $DEFAULT_REPO/paymentservice:canary
+        imagePullPolicy: Always
         ports:
         - containerPort: 50051
         env:
@@ -402,6 +407,7 @@ spec:
       containers:
       - name: server
         image: $DEFAULT_REPO/productcatalogservice:canary
+        imagePullPolicy: Always
         ports:
         - containerPort: 3550
         env:
@@ -462,6 +468,7 @@ spec:
       containers:
       - name: server
         image: $DEFAULT_REPO/cartservice:canary
+        imagePullPolicy: Always
         ports:
         - containerPort: 7070
         env:
@@ -537,6 +544,7 @@ spec:
       containers:
       - name: main
         image: $DEFAULT_REPO/loadgenerator:canary
+        imagePullPolicy: Always
         env:
         - name: FRONTEND_ADDR
           value: "frontend:80"
@@ -569,6 +577,7 @@ spec:
       containers:
       - name: server
         image: $DEFAULT_REPO/currencyservice:canary
+        imagePullPolicy: Always
         ports:
         - name: grpc
           containerPort: 7000
@@ -627,6 +636,7 @@ spec:
       containers:
       - name: server
         image: $DEFAULT_REPO/shippingservice:canary
+        imagePullPolicy: Always
         ports:
         - containerPort: 50051
         env:
@@ -743,6 +753,7 @@ spec:
       containers:
       - name: server
         image: $DEFAULT_REPO/adservice:canary
+        imagePullPolicy: Always
         ports:
         - containerPort: 9555
         env:

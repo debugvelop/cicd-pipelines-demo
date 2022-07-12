@@ -42,6 +42,7 @@ spec:
       containers:
       - name: server
         image: $DEFAULT_REPO/emailservice:production
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
         env:
@@ -99,6 +100,7 @@ spec:
       containers:
         - name: server
           image: $DEFAULT_REPO/checkoutservice:production
+          imagePullPolicy: Always
           ports:
           - containerPort: 5050
           readinessProbe:
@@ -171,6 +173,7 @@ spec:
       containers:
       - name: server
         image: $DEFAULT_REPO/recommendationservice:production
+        imagePullPolicy: Always
         ports:
         - containerPort: 8080
         readinessProbe:
@@ -234,6 +237,7 @@ spec:
       containers:
         - name: server
           image: $DEFAULT_REPO/frontend:production
+          imagePullPolicy: Always
           ports:
           - containerPort: 8080
           readinessProbe:
@@ -342,6 +346,7 @@ spec:
       containers:
       - name: server
         image: $DEFAULT_REPO/paymentservice:production
+        imagePullPolicy: Always
         ports:
         - containerPort: 50051
         env:
@@ -400,6 +405,7 @@ spec:
       containers:
       - name: server
         image: $DEFAULT_REPO/productcatalogservice:production
+        imagePullPolicy: Always
         ports:
         - containerPort: 3550
         env:
@@ -460,6 +466,7 @@ spec:
       containers:
       - name: server
         image: $DEFAULT_REPO/cartservice:production
+        imagePullPolicy: Always
         ports:
         - containerPort: 7070
         env:
@@ -535,6 +542,7 @@ spec:
       containers:
       - name: main
         image: $DEFAULT_REPO/loadgenerator:production
+        imagePullPolicy: Always
         env:
         - name: FRONTEND_ADDR
           value: "frontend:80"
@@ -567,6 +575,7 @@ spec:
       containers:
       - name: server
         image: $DEFAULT_REPO/currencyservice:production
+        imagePullPolicy: Always
         ports:
         - name: grpc
           containerPort: 7000
@@ -625,6 +634,7 @@ spec:
       containers:
       - name: server
         image: $DEFAULT_REPO/shippingservice:production
+        imagePullPolicy: Always
         ports:
         - containerPort: 50051
         env:
@@ -741,6 +751,7 @@ spec:
       containers:
       - name: server
         image: $DEFAULT_REPO/adservice:production
+        imagePullPolicy: Always
         ports:
         - containerPort: 9555
         env:
