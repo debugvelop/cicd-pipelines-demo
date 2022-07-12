@@ -1,0 +1,39 @@
+pipeline {
+    agent any
+    
+    environment {
+        DOCKERHUB_CREDENTIALS = credentials('dockerhub')
+    }
+
+    stages {
+        stage('Build & Push') {
+            steps {
+                sh 'echo "Cloning repository"'
+                sh 'git clone -b main --single-branch https://github.com/debugvelop/cicd-pipelines-demo.git'
+                sh 'echo "Clone successful"'
+                sh 'echo "Building and pushing images"'
+                sh 'sudo docker login -u $DOCKERHUB_CREDENTIALS_USR -p $DOCKERHUB_CREDENTIALS_PSW'
+                sh 'cd cicd-pipelines-demo && sudo skaffold build --cache-artifacts=false --default-repo=YOUR_IMAGE_REPO --build-concurrency=2 -t production'
+                sh 'echo "Build and push successful"'
+            }
+        }
+        
+        stage ('Deploy') {
+            steps {
+                sh 'echo "Deploying images"'
+                sh 'gcloud container clusters get-credentials online-boutique --zone us-west1-a --project YOUR_PROJECT_ID'
+                sh 'cd cicd-pipelines-demo && export DEFAULT_REPO=YOUR_IMAGE_REPO && export NGINX_LB_IP=YOUR_NGINX_LB_IP && envsubst < ./thirdparty/production/kubernetes-manifests.yaml | kubectl apply -f -'
+                sh 'echo "Deploy successful"'
+            }
+        }
+    }
+    
+    post {
+        always {
+            sh 'cd ..'
+            sh 'rm -rf gcp-cicd-demo'
+            sh 'sudo docker logout'
+            sh 'sudo docker system prune -a -f'
+        }
+    }
+}
