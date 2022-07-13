@@ -318,7 +318,7 @@ spec:
       nginx.ingress.kubernetes.io/canary-weight: "50"
   spec:
     rules:
-    - host: "$NGINX_LB_IP.nip.io"
+    - host: $NGINX_LB_IP.nip.io
       http:
         paths:
         - path: "/"
