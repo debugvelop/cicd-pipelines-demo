@@ -181,15 +181,15 @@ steps:
   args: [ '-c', 'docker push $$AR/shippingservice:canary']
   secretEnv: ['AR']
 
-#Get the cluster credential and nginx load balancer IP address
+#Get the cluster credential
 - name: 'gcr.io/cloud-builders/gcloud'
   entrypoint: 'bash'
   args:
   - '-c'
   - |
     apt-get update && apt-get install -y gettext-base jq \
-    && gcloud container clusters get-credentials online-boutique --zone us-west1-a --project $PROJECT_ID \
-    && export DEFAULT_REPO=$$AR && export NGINX_LB_IP=$(kubectl get service ingress-nginx-controller -n ingress-nginx -ojson | jq -r ".status.loadBalancer.ingress[].ip") \
+    && gcloud container clusters get-credentials online-boutique2 --zone YOUR_CLUSTER_ZONE --project $PROJECT_ID \
+    && export DEFAULT_REPO=$$AR \
     && envsubst < googlecloud-native/canary/kubernetes-manifests.yaml > googlecloud-native/canary/kubernetes-manifests-ready.yaml
   secretEnv: ['AR']
 

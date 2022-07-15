@@ -21,7 +21,7 @@ pipeline {
         stage ('Deploy') {
             steps {
                 sh 'echo "Deploying images"'
-                sh 'gcloud container clusters get-credentials online-boutique --zone us-west1-a --project YOUR_PROJECT_ID'
+                sh 'gcloud container clusters get-credentials online-boutique1 --zone YOUR_CLUSTER_ZONE --project YOUR_PROJECT_ID'
                 sh 'cd cicd-pipelines-demo && export DEFAULT_REPO=YOUR_IMAGE_REPO && export NGINX_LB_IP=YOUR_NGINX_LB_IP && envsubst < ./thirdparty/production/kubernetes-manifests.yaml | kubectl apply -f -'
                 sh 'echo "Deploy successful"'
             }
